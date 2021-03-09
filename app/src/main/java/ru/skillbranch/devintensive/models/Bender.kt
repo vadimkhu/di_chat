@@ -41,7 +41,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
         NORMAL(Triple(255, 255, 255)),
         WARNING(Triple(255, 120, 0)),
         DANGER(Triple(255, 60, 60)),
-        CRITICAL(Triple(255, 255, 0));
+        CRITICAL(Triple(255, 0, 0));
 
         fun nextStatus(): Status {
             return values()[(this.ordinal + 1) % values().size]
@@ -81,7 +81,7 @@ class Bender(var status: Status = Status.NORMAL, var question: Question = Questi
                 return (answer.isDigitsOnly() && answer.length == 7) to "Серийный номер содержит только цифры, и их 7"
             }
         },
-        IDLE("На этом всё, вопросов больше нет.", listOf()) {
+        IDLE("На этом все, вопросов больше нет", listOf()) {
             override fun nextQuestion(): Question = IDLE
             override fun checkIfAnswerValid(answer: String): Pair<Boolean, String> = true to ""
         };
