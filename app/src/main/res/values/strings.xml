@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">di_chat</string>
+    <string name="input_hint_text">Введите тескт</string>
+</resources>
