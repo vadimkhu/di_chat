@@ -15,9 +15,9 @@ import ru.skillbranch.devintensive.extensions.hideKeyboard
 import ru.skillbranch.devintensive.models.Bender
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
-    lateinit var benderImg : ImageView
+    lateinit var benderImage : ImageView
     lateinit var textTxt : TextView
-    lateinit var messageEdit : EditText
+    lateinit var messageEt : EditText
     lateinit var sendBtn : ImageView
     lateinit var benderObj : Bender
 
@@ -25,9 +25,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        benderImg = iv_bender
+        benderImage = iv_bender
         textTxt = tv_text
-        messageEdit = et_message
+        messageEt = et_message
         sendBtn = iv_send
 
         val status = savedInstanceState?.getString("STATUS") ?: Bender.Status.NORMAL.name
@@ -36,12 +36,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         benderObj = Bender(Bender.Status.valueOf(status), Bender.Question.valueOf(question))
 
         val (r,g,b) = benderObj.status.color
-        benderImg.setColorFilter(Color.rgb(r,g,b), PorterDuff.Mode.MULTIPLY)
+        benderImage.setColorFilter(Color.rgb(r,g,b), PorterDuff.Mode.MULTIPLY)
 
         textTxt.text = benderObj.askQuestion()
         sendBtn.setOnClickListener(this)
 
-        messageEdit.setOnEditorActionListener { _, actionId, _ ->
+        messageEt.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 answerQuestion()
                 hideKeyboard()
@@ -53,10 +53,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     fun answerQuestion() {
-        val (phrase, color) = benderObj.listenAnswer(messageEdit.text.toString())
-        messageEdit.setText("")
+        val (phrase, color) = benderObj.listenAnswer(messageEt.text.toString())
+        messageEt.setText("")
         val (r, g, b) = color
-        benderImg.setColorFilter(Color.rgb(r, g, b), PorterDuff.Mode.MULTIPLY)
+        benderImage.setColorFilter(Color.rgb(r, g, b), PorterDuff.Mode.MULTIPLY)
         textTxt.text = phrase
     }
 
