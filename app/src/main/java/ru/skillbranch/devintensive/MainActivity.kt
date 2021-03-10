@@ -52,17 +52,18 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     fun answerQuestion() {
+        hideKeyboard()
         val (phrase, color) = benderObj.listenAnswer(messageEdit.text.toString())
         messageEdit.setText("")
         val (r, g, b) = color
         benderImg.setColorFilter(Color.rgb(r, g, b), PorterDuff.Mode.MULTIPLY)
         textTxt.text = phrase
-        hideKeyboard()
     }
 
     override fun onClick(v: View?) {
-        if (v?.id == R.id.iv_send)
+        if (v?.id == R.id.iv_send) {
             answerQuestion()
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
