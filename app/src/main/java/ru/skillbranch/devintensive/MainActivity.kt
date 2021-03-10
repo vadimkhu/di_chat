@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         messageEdit.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 answerQuestion()
+                hideKeyboard()
                 true
             }
             else
@@ -52,7 +53,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     fun answerQuestion() {
-        hideKeyboard()
         val (phrase, color) = benderObj.listenAnswer(messageEdit.text.toString())
         messageEdit.setText("")
         val (r, g, b) = color
